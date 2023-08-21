@@ -1,0 +1,9 @@
+type Query {
+    brands(manufacturer: String @doc(description: "manufacturer product"))
+    : [brandslist] @resolver(class: "Test\\Donation\\Model\\Resolver\\ProductsResolver")
+    @doc(description: "Get brands products")
+}
+
+type brandslist {
+    brand: String @doc(description: "Product brand")
+}

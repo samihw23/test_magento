@@ -1,0 +1,46 @@
+<?php
+
+/**  @var $block Test\Donation\Block\Cart\Donation */
+$hasDonated = $block->hasDonated();
+?>
+<?php if ($block->isVisible()) : ?>
+  <div class="donation-bloc">
+      <h3><?= __('Donation Bloc ') ?></h3>
+    <form action="<?= $block->getUrl('donation/cart/manage') ?>" method="post" id="form_donation">
+        <?= $block->getBlockHtml('formkey') ?>
+        <div>
+            <img src="<?= $block->getProductImageUrl() ?>" alt="img-donation-product" /></div>
+            <div><span><strong><?= __('Titre: ') ?></strong><?= $block->getTitle() ?></span></div>
+            <div><span><strong><?= __('Description: ') ?></strong><?= $block->getDescription() ?></span></div>
+        <?php if (!$hasDonated) : ?>
+            <div class="add-donation">
+               <span><strong><?= __('Montant:') ?></strong></span>
+               <input class="donation-amount" name ="donation-amount" value="<?= $block->getAmount() ?>" type="number"/>
+               <button type="submit">
+                    <span><?= __('Faire un don') ?></span>
+               </button>
+           </div>
+        <?php else : ?>
+            <div class="cancel-donation">
+            <button type="submit">
+                <input class="cancel-donation" name ="cancel-donation" value="1"  type="hidden"/>
+                <span><?= __('J\'annule mon don') ?></span>
+            </button>
+            </div>
+        <?php endif ?>
+    </form>
+  </div>
+<?php endif ?>
+<style>
+    .donation-bloc {
+        width: 75%;
+        float: left;
+        border: 0;
+        box-sizing: border-box;
+        padding-right: 4%;
+    }
+    .donation-amount {
+        max-width: 50px;
+        margin-bottom: 20px;
+    }
+</style>
